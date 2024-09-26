@@ -1,26 +1,30 @@
-let productData;
+let productData ;
+
 const getData = async () => {
   let request = await fetch("https://dummyjson.com/products");
   let response = await request.json();
-  mapper(response.products);
   productData = response.products;
+  mapper(productData);
+
 };
 
 getData();
 
-const mapper = (products) => {
+const mapper = (productData) => {
+  
   document.getElementById("product").innerHTML = "";
-  products.map((product) => {
+
+  productData.map((product) => {
+
     let div = document.createElement("div");
     div.className = "product-box";
 
     let id = document.createElement("h3");
     id.innerHTML = product.id;
     id.className = `ID: ${product.id}`;
-
+    
     let images = document.createElement("img");
-
-    images.src = product.images;
+    images.src = product.images[0];  
     images.className = "images";
 
     let title = document.createElement("h3");
